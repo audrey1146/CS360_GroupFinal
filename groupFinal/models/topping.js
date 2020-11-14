@@ -12,13 +12,16 @@ var Schema = mongoose.Schema;
 var ToppingSchema = new Schema(
   {
     name: {type: String, required: true, maxlength: 50, unique: true},
-    image: {},
   }
 );
 
 
 // TODO:  Understand virtual properties and add what is needed
 
+// Virtual for toppings ID
+ToppingSchema.virtual('ID').get(function () {
+  return this._id;
+});
 
 //Export model
 module.exports = mongoose.model('Topping', ToppingSchema);

@@ -11,9 +11,9 @@ var Schema = mongoose.Schema;
 
 var DailyChoiceSchema = new Schema(
   {
-    user_id: {type: String, required: true, maxlength: 50, unique: true},
-    topping_id: {},
-    time_stamp: {type: Date, default: Date.now() }, // SUBJET TO CHANGE
+    user_id: {type: Number, required: true},
+    topping_id: {type: Number, required: true},
+    time_stamp: {type: Date, default: Date.now(), required: true }, // SUBJET TO CHANGE
   }
 );
 
