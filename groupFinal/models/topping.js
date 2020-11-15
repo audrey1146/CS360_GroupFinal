@@ -12,6 +12,7 @@ var Schema = mongoose.Schema;
 var ToppingSchema = new Schema(
   {
     name: {type: String, required: true, maxlength: 50, unique: true},
+    image_path: {type: String, required: true, maxlength: 50}
   }
 );
 

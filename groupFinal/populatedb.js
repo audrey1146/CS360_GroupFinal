@@ -21,6 +21,7 @@ var users = []
 var toppings = []
 var dailychoice = []
 
+// Function to create a user entry
 function userCreate(user_name, password,
   first_name, last_name, email, security_answer) 
 {
@@ -48,10 +49,10 @@ function userCreate(user_name, password,
   } );
 }
 
-
-function toppingCreate(name) 
+// Function to create a topping entry
+function toppingCreate(name, image_path) 
 {
-  var newTopping = new Topping( { name: name });
+  var newTopping = new Topping( { name: name, image_path: image_path });
        
   newTopping.save(function (err) 
   {
@@ -66,6 +67,7 @@ function toppingCreate(name)
   } );
 }
 
+// Function to create a daily choice entry
 function dailyChoiceCreate(user_id, topping_id, time_stamp) 
 {
   var newChoice = new DailyChoice( { user_id: user_id, topping_id: topping_id, time_stamp: time_stamp });
@@ -83,7 +85,7 @@ function dailyChoiceCreate(user_id, topping_id, time_stamp)
   } );
 }
 
-
+// Creation of test data - users
 function createUsers(cb) {
   async.series(
     [
@@ -103,37 +105,38 @@ function createUsers(cb) {
     ], cb);
 }
 
+// Creation of test data - toppings
 function createToppings(cb) {
   async.series(
     [
       function(callback) {
-        toppingCreate('None', callback);
+        toppingCreate('None', '../images/pizza.svg', callback);
       },
 
       // MEATS
       function(callback) {
-        toppingCreate('Pepperoni', callback);
+        toppingCreate('Pepperoni', '../images/pizza.svg', callback);
       },
 
       // FAKE MEATS
       function(callback) {
-        toppingCreate('Tofu', callback);
+        toppingCreate('Tofu', '../images/pizza.svg', callback);
       },
 
       // CHEESE
       function(callback) {
-        toppingCreate('Mozzarella', callback);
+        toppingCreate('Mozzarella', '../images/pizza.svg', callback);
       },
 
       // VEGGIES
       function(callback) {
-        toppingCreate('Mushroom', callback);
+        toppingCreate('Mushroom', '../images/pizza.svg', callback);
       },
 
     ], cb);
 }
 
-
+// Creation of test data - daily choices
 function createDailyToppings(cb) {
   async.series(
     [
