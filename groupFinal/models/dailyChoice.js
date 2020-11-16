@@ -11,8 +11,8 @@ var Schema = mongoose.Schema;
 
 var DailyChoiceSchema = new Schema(
   {
-    user_id: {type: Number, required: true},
-    topping_id: {type: Number, required: true},
+    user_id: { type: Schema.ObjectId, ref: 'User', required: true },
+    topping_id: { type: Schema.ObjectId, ref: 'Topping', required: true },
     time_stamp: {type: Date, default: Date.now(), required: true }, // SUBJET TO CHANGE
   }
 );

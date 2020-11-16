@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-console.log('This script populates some test books, authors, genres and bookinstances to your database. Specified database as argument - e.g.: populatedb mongodb+srv://cooluser:coolpassword@cluster0.a9azn.mongodb.net/local_library?retryWrites=true');
+console.log('This script populates some users, toppings, and dailyChoices to your database.');
 
 // Get arguments passed on command line
 var userArgs = process.argv.slice(2);
@@ -22,8 +22,7 @@ var toppings = []
 var dailychoice = []
 
 // Function to create a user entry
-function userCreate(user_name, password,
-  first_name, last_name, email, security_answer) 
+function userCreate(user_name, password, first_name, last_name, email, security_answer, cb) 
 {
   userdetail = { 
     user_name: user_name,
@@ -34,7 +33,7 @@ function userCreate(user_name, password,
     security_answer, security_answer
   }
 
-  var newUser = new User( { userdetail });
+  var newUser = new User(userdetail);
        
   newUser.save(function (err) 
   {
@@ -50,7 +49,7 @@ function userCreate(user_name, password,
 }
 
 // Function to create a topping entry
-function toppingCreate(name, image_path) 
+function toppingCreate(name, image_path, cb) 
 {
   var newTopping = new Topping( { name: name, image_path: image_path });
        
@@ -68,7 +67,7 @@ function toppingCreate(name, image_path)
 }
 
 // Function to create a daily choice entry
-function dailyChoiceCreate(user_id, topping_id, time_stamp) 
+function dailyChoiceCreate(user_id, topping_id, time_stamp, cb) 
 {
   var newChoice = new DailyChoice( { user_id: user_id, topping_id: topping_id, time_stamp: time_stamp });
        
@@ -110,27 +109,27 @@ function createToppings(cb) {
   async.series(
     [
       function(callback) {
-        toppingCreate('None', '../images/pizza.svg', callback);
+        toppingCreate('None', '/public/images/pizza.svg', callback);
       },
 
       // MEATS
       function(callback) {
-        toppingCreate('Pepperoni', '../images/pizza.svg', callback);
+        toppingCreate('Pepperoni', '/public/images/pizza.svg', callback);
       },
 
       // FAKE MEATS
       function(callback) {
-        toppingCreate('Tofu', '../images/pizza.svg', callback);
+        toppingCreate('Tofu', '/public/images/pizza.svg', callback);
       },
 
       // CHEESE
       function(callback) {
-        toppingCreate('Mozzarella', '../images/pizza.svg', callback);
+        toppingCreate('Mozzarella', '/public/images/pizza.svg', callback);
       },
 
       // VEGGIES
       function(callback) {
-        toppingCreate('Mushroom', '../images/pizza.svg', callback);
+        toppingCreate('Mushroom', '/public/images/pizza.svg', callback);
       },
 
     ], cb);
@@ -141,16 +140,16 @@ function createDailyToppings(cb) {
   async.series(
     [
       function(callback) {
-        dailyChoiceCreate(users[0].ID, toppings[4].ID, '2020-11-13', callback);
+        dailyChoiceCreate(users[0], toppings[4], '2020-11-13', callback);
       },
       function(callback) {
-        dailyChoiceCreate(users[1].ID, toppings[1].ID, '2020-11-10', callback);
+        dailyChoiceCreate(users[1], toppings[1], '2020-11-10', callback);
       },
       function(callback) {
-        dailyChoiceCreate(users[2].ID, toppings[2].ID, '2020-11-11', callback);
+        dailyChoiceCreate(users[2], toppings[2], '2020-11-11', callback);
       },
       function(callback) {
-        dailyChoiceCreate(users[3].ID, toppings[3].ID, '2020-11-12', callback);
+        dailyChoiceCreate(users[3], toppings[3], '2020-11-12', callback);
       },
       
     ], cb);
