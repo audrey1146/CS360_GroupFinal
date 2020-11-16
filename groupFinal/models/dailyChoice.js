@@ -19,6 +19,9 @@ var DailyChoiceSchema = new Schema(
 
 
 // TODO:  Understand virtual properties and add what is needed
+DailyChoiceSchema.virtual('TimeStamp').get(function () {
+  return this.time_stamp;
+});
 
 
 //Export model
