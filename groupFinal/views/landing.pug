@@ -1,5 +1,26 @@
 extends layout
 
 block content
+  block content
   h1= title
-  p Welcome to #{title}
+  
+  p (#{topping_list.name})   (#{topping_list.image_path})
+  img(src='/public/images/pizza.svg', alt="No Image")
+
+
+<!--
+  exports.index = function(req, res) 
+{   
+  Topping.findOne().sort([['name', 'ascending']]).exec(function (err, list_toppings) 
+  {
+    if (err) { return next(err); }
+    // Successful, so render.
+    res.render('landing', { title: 'Topping Home', topping_list: list_toppings });
+  })  
+};
+
+
+
+// GET catalog home page.
+router.get('/', topping_controller.index);
+-->
