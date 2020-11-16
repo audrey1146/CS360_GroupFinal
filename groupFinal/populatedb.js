@@ -109,42 +109,183 @@ function createToppings(cb) {
   async.series(
     [
       function(callback) {
-        toppingCreate('None', '/public/images/pizza.svg', callback);
+        toppingCreate('None', '/public/images/none.svg', callback);
       },
 
       // MEATS
       function(callback) {
-        toppingCreate('Pepperoni', '/public/images/pizza.svg', callback);
+        toppingCreate('Pepperoni', '/public/images/pork.svg', callback);
       },
       function(callback) {
-        toppingCreate('Sausage', '/public/images/pizza.svg', callback);
+        toppingCreate('Sausage', '/public/images/pork.svg', callback);
       },
       function(callback) {
-        toppingCreate('Ham', '/public/images/pizza.svg', callback);
+        toppingCreate('Ham', '/public/images/pork.svg', callback);
       },
       function(callback) {
-        toppingCreate('Bacon', '/public/images/pizza.svg', callback);
+        toppingCreate('Bacon', '/public/images/pork.svg', callback);
       },
       function(callback) {
-        toppingCreate('Chicken', '/public/images/pizza.svg', callback);
+        toppingCreate('Prosciutto', '/public/images/pork.svg', callback);
       },
       function(callback) {
-        toppingCreate('Prosciutto', '/public/images/pizza.svg', callback);
+        toppingCreate('Spicy Italian Salami', '/public/images/pork.svg', callback);
       },
-
-      // FAKE MEATS
       function(callback) {
-        toppingCreate('Tofu', '/public/images/pizza.svg', callback);
+        toppingCreate('Chorizo', '/public/images/pork.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Grilled Chicken', '/public/images/chicken.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Fried Egg', '/public/images/chicken.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Buffalo Chicken', '/public/images/chicken.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Shrimp', '/public/images/fish.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Sardines', '/public/images/fish.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Anchovies', '/public/images/fish.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Lobster', '/public/images/fish.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Cajun Prawns', '/public/images/fish.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Crawfish', '/public/images/fish.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Ground Beef', '/public/images/beef.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Meatballs', '/public/images/beef.svg', callback);
       },
 
       // CHEESE
       function(callback) {
-        toppingCreate('Mozzarella', '/public/images/pizza.svg', callback);
+        toppingCreate('Mozzarella', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Blue Cheese', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Goat Cheese', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Gorgonzola', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Parmesan', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Provolone', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Smoked Gouda', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Ricota', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Cheddar Cheese', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Feta', '/public/images/cheese.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Grúyere cheese', '/public/images/cheese.svg', callback);
       },
 
       // VEGGIES
       function(callback) {
-        toppingCreate('Mushroom', '/public/images/pizza.svg', callback);
+        toppingCreate('Mushroom', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Red Onion', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Red Peppers', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Pineapple', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Sun-Dried Tomatoes', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Cherry Tomatoes', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Avocado', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Caramelized Onions', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Kale', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Spinach', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Black Olives', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Garlic', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Capers', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Artichoke Hearts', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Jalapeños', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Thin Sliced Potatoes', '/public/images/vegetables.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Basil', '/public/images/vegetables.svg', callback);
+      },
+
+      // Sauce / Condiments
+      function(callback) {
+        toppingCreate('BBQ Sauce', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Marinara Sauce', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Alfredo Sauce', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Pesto', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Olive Oil', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Hot Wing Sauce', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Ranch', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Romesco Sauce', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Salsa', '/public/images/seasoning.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Hot Sauce', '/public/images/seasoning.svg', callback);
       },
 
     ], cb);
