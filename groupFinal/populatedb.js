@@ -98,7 +98,7 @@ function createUsers(cb) {
         userCreate('duane', '123Pizza123', 'Duane', 'Keanu', 'duane@gmail.com', 'Mars', callback);
       },
       function(callback) {
-        userCreate('zane', '123Pizza123', 'Zane', 'French', 'zane@gmail.com', 'Im a trip major I dont have time for pizza', callback);
+        userCreate('zane', '123Pizza123', 'Zane', 'French', 'zane@gmail.com', 'Im a triple major I dont have time for pizza', callback);
       },
 
     ], cb);
@@ -115,6 +115,21 @@ function createToppings(cb) {
       // MEATS
       function(callback) {
         toppingCreate('Pepperoni', '/public/images/pizza.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Sausage', '/public/images/pizza.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Ham', '/public/images/pizza.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Bacon', '/public/images/pizza.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Chicken', '/public/images/pizza.svg', callback);
+      },
+      function(callback) {
+        toppingCreate('Prosciutto', '/public/images/pizza.svg', callback);
       },
 
       // FAKE MEATS
