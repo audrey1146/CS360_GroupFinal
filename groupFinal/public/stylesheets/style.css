@@ -46,3 +46,6 @@ form {
 #nav {
   position: absolute;
 }
+.scalingButtons {
+  font-size: 4vw
+}
