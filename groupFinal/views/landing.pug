@@ -15,7 +15,7 @@ html
             button(class='class="navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation')
               span(class='navbar-toggler-icon')
         div(class='center')
-          h1 Slice of Pacific
+          h1(class='scalingButtons') Slice of Pacific
       //div(class='pos-f-t')
         div(class='collapse' id='navbarToggleExternalContent')
           div(class=' p-4')
@@ -29,13 +29,14 @@ html
     div(class='row row-no-padding')
       div(class='col-xs-3 col-md-3 col-no-padding')
       div(class='col-xs-6 col-md-6 col-no-padding')
-        div(class='content_area')
+        div(class='content_area text-center')
           form
-            button(type='button' class= 'scalingButton btn btn-success') Sign In!
+            //button(href='/login' type='button' class= 'scalingButtons btn btn-success') Sign In!
+            a(href='/login' class='scalingButtons btn btn-success') Sign In!
             div(class='row m-3')
             img(src="/public/images/pizza.png")
             div(class='row m-3')
-            button(type='button' class='scalingButton btn btn-success') Don't have an account?
+            a(href='/login' class='scalingButtons btn btn-success') Don't have an account?
       div(class='col-xs-3 col-md-3 col-no-padding')
 
     script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
