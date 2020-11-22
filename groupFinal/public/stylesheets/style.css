@@ -46,6 +46,21 @@ form {
 #nav {
   position: absolute;
 }
+
+
+/* CSS Used on the Landing and Login */
 .scalingButtons {
+  font-size: 4vw
+}
+
+.scalingHeader {
+  font-size: 5vw
+}
+
+.scalingLogin {
   font-size: 3vw
+}
+
+.screenHeight {
+  height: 100%;
 }
