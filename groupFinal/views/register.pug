@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .main
+      h1 Sign Up
+      
+      // register form
+      form(method='POST' action='/users/new/add')
+        div.form-group
+          label(for='user_name') Username:
+          input#name.form-control(type='text', placeholder='First Name' name='user_name' required)
+        div.form-group
+          label(for='first_name') First Name:
+          input#name.form-control(type='text', placeholder='First Name' name='first_name' required)
+        div.form-group
+          label(for='last_name') Last Name:
+          input#name.form-control(type='text', placeholder='Last Name' name='last_name' required)
+        div.form-group
+          label(for='email') Email:
+          input#email.form-control(type='email', placeholder='name@email.com' name='email' required)
+        div.form-group
+          label(for='pw') Password:
+          input#pw.form-control(type='password' name='password' required)
+        div.form-group
+          label(for='pw2') Confirm Password:
+          input#pw2.form-control(type='password' name='confirm_password' required)
+        div.form-group
+          label(for='security_answer') In what city did you first try pizza?:
+          input#name.form-control(type='text', placeholder='Security Answer' name='security_answer' required)
+        button.btn.btn-primary(type='submit') Sign up
+
+  p #{alert}

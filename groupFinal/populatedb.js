@@ -30,7 +30,7 @@ function userCreate(user_name, password, first_name, last_name, email, security_
     first_name: first_name,
     last_name: last_name,
     email: email,
-    security_answer, security_answer
+    security_answer: security_answer
   }
 
   var newUser = new User(userdetail);

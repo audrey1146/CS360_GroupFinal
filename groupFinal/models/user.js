@@ -7,6 +7,8 @@
 
 var mongoose = require('mongoose');
 
+const { body, validationResult } = require('express-validator');
+
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema(

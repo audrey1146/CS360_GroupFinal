@@ -3,13 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var expressValidator = require('express-validator');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://dbUser:dbPassword@groupcluster.vh2v7.mongodb.net/local_final_db?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://zane:zane@cluster0.144ts.mongodb.net/local_final_db?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -20,8 +22,17 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+
+
+
+// Express Validator Middleware
+
 app.use(express.json());
+
+
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));

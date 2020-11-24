@@ -9,4 +9,5 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Slice of Pacific' });
 });
 
+
 module.exports = router;
