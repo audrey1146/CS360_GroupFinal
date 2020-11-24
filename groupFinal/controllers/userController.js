@@ -141,7 +141,6 @@ exports.validation = checkSchema({
     },
     custom: {
       options: (value, { req }) => {
-
         return value === req.body.confirm_password;
       },
       errorMessage: ' | Passwords must match'
