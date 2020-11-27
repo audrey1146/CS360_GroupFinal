@@ -1,3 +1,11 @@
+/*****************************************************************************
+ * File Name:     app.js
+ * Date:          11/12/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      Application entry point that sets up and returns the
+ *                express() application object
+ ****************************************************************************/
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,7 +15,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-//Set up mongoose connection
+// Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb+srv://dbUser:dbPassword@groupcluster.vh2v7.mongodb.net/local_final_db?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
@@ -24,9 +32,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
 app.use("/public", express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

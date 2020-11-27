@@ -1,3 +1,10 @@
+<!--
+ * File Name:     login.pug
+ * Date:          11/27/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      View for the login page
+-->
+
 doctype html
 html(class='h-100')
   head
@@ -14,17 +21,25 @@ html(class='h-100')
         div(id='header')
           div(class='center')
             h1(class='scalingHeader') Slice of Pacific
+    if errors 
+      ul 
+        for error in errors
+          li!= error.msg
+
+    if missing 
+      ul 
+          li=missing
 
     div(class='container h-100')
       div(class='row h-100 justify-content-center align-items-center screenHeight')
         div(class='col-xs-3 col-no-padding')
           div(class='content_area text-center')
-            form
-              input(type='text' placeholder='username' class='scalingButtons')
+            form(method='post' action='/login')
+              input(type='text' placeholder='Username' name='username' class='scalingButtons')
               div(class='row m-1')
-              input(type='text' placeholder='password' class='scalingButtons')
+              input(type='password' placeholder='Password' name='password' class='scalingButtons')
               div(class='row m-3')
-              button(type='button' class='btn btn-success scalingButtons') Login
+              button(type='submit' class='btn btn-success scalingButtons') Login
 
     script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')

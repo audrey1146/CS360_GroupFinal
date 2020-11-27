@@ -1,30 +1,39 @@
-var express = require('express');
-var router = express.Router();
+/*****************************************************************************
+ * File Name:     index.js
+ * Date:          11/27/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      All of the routes for the Slice of Pacific website
+ ****************************************************************************/
+
+let express = require('express');
+let router = express.Router();
+
+// Require controllers
+let user_controller = require('../controllers/userController');
+
 
 /* GET landing page. */
-router.get('/', function(req, res, next) 
-{
-  res.render('landing');
-});
+router.get('/', user_controller.user_landing);
 
-/* GET landing page. */
-router.get('/login', function(req, res, next) 
-{
-  res.render('login');
-});
 
-/* GET landing page. */
-router.get('/register', function(req, res, next) 
-{
-  res.render('register');
-});
+/* GET login page. */
+router.get('/login', user_controller.user_login);
 
-/* GET request for user. */
-router.get('/home', function(req, res, next) 
-{
-  res.render('register');
-});
 
+/* GET registration page. */
+router.get('/register', user_controller.user_register);
+
+
+/* POST request to login */
+router.post('/login', user_controller.user_login_post);
+
+
+/* GET home poll page. */
+router.get('/home/:id', user_controller.user_home);
+
+
+/* GET home stats page. */
+router.get('/stats/:id', user_controller.user_stats);
 
 
 module.exports = router;

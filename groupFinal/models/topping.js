@@ -16,9 +16,6 @@ var ToppingSchema = new Schema(
   }
 );
 
-
-// TODO:  Understand virtual properties and add what is needed
-
 // Virtual for toppings ID
 ToppingSchema.virtual('ID').get(function () {
   return this._id;

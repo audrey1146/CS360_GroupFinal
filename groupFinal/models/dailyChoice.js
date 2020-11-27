@@ -13,12 +13,11 @@ var DailyChoiceSchema = new Schema(
   {
     user_id: { type: Schema.ObjectId, ref: 'User', required: true },
     topping_id: { type: Schema.ObjectId, ref: 'Topping', required: true },
-    time_stamp: {type: Date, default: Date.now(), required: true }, // SUBJET TO CHANGE
+    time_stamp: {type: Date, default: Date.now(), required: true },
   }
 );
 
-
-// TODO:  Understand virtual properties and add what is needed
+// Virtual for the timestamp of the daily choice
 DailyChoiceSchema.virtual('TimeStamp').get(function () {
   return this.time_stamp;
 });
