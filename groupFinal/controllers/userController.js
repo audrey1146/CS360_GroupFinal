@@ -106,7 +106,6 @@ exports.user_login_post =
 
     if (!errors.isEmpty())
     {
-      console.log('Errors');
       res.render('login', {errors: errors.array()});
     }
     else
