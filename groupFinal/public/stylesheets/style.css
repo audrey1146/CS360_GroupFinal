@@ -58,7 +58,17 @@ form {
 }
 
 .scalingHeader {
-  font-size: 4vw
+  font-size: 4vw;
+}
+
+.scalingErrors {
+  font-size: 1vw;
+  font-family: 'Roboto Slab', serif;
+}
+
+.scalingText {
+  font-size: 2vw;
+  font-family: 'Roboto Slab', serif;
 }
 
 .scalingImage {
@@ -67,15 +77,60 @@ form {
   height: auto;
 }
 
+/* 1024 and smaller
 @media screen and (max-width: 1024px) {
   .scalingButtons {
     font-size: 4vw;
   }
   
   .scalingHeader {
-    font-size: 7vw
+    font-size: 7vw;
+  }
+
+  .scalingErrors {
+    font-size: 3vw;
+  }
+
+  .scalingText {
+    font-size: 3vw;
   }
 }
+
+@media screen and (max-width: 900px) {
+  .scalingButtons {
+    font-size: 5vw;
+  }
+  
+  .scalingHeader {
+    font-size: 7vw;
+  }
+
+  .scalingErrors {
+    font-size: 3vw;
+  }
+
+  .scalingText {
+    font-size: 4.5vw;
+  }
+}*/
+
+@media screen and (max-width: 600px) {
+  .scalingButtons {
+    font-size: 18px;
+  }
+  
+  .scalingHeader {
+    font-size: 7vw;
+  }
+
+  .scalingErrors {
+    font-size: 13px;
+  }
+
+  .scalingText {
+    font-size: 16px;
+  }
+} 
 
 .screenHeight {
   height: 70%!important;

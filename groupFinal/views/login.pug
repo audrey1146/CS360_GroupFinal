@@ -19,23 +19,28 @@ html(class='h-100')
         div(id='header')
           div(class='center')
             h1(class='scalingHeader') Slice of Pacific
-    if errors 
+    //if errors 
       ul 
         for error in errors
           li!= error.msg
-
-    if missing 
-      ul 
-          li=missing
 
     div(class='container h-100')
       div(class='row h-100 justify-content-center align-items-center screenHeight')
         div(class='col-xs-3 col-no-padding')
           div(class='content_area text-center')
+            
+            if missing 
+              p(class='scalingErrors')=missing
+
+            if errors
+              ul(class='text-left scalingErrors')
+                for error in errors
+                  li!=error.msg
+
             form(method='post' action='/login')
-              input(type='text' placeholder='Username' name='username' class='scalingButtons')
+              input(type='text' placeholder='Username' name='username' class='scalingText')
               div(class='row m-1')
-              input(type='password' placeholder='Password' name='password' class='scalingButtons')
+              input(type='password' placeholder='Password' name='password' class='scalingText')
               div(class='row m-3')
               button(type='submit' class='btn btn-success scalingButtons') Login
 

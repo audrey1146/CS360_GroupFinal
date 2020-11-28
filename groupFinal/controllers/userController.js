@@ -120,7 +120,7 @@ exports.user_login_post =
         }
         else // User does not exist - reload login page
         {
-          res.render('login', {missing: 'Could Not Find User'});
+          res.render('login', {missing: 'Username or password is incorrect'});
           return;
         }
       })
