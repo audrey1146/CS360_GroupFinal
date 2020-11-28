@@ -5,11 +5,11 @@
  * Purpose :      Define the schema for the User table
  ****************************************************************************/
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var UserSchema = new Schema(
+let UserSchema = new Schema(
   {
     user_name: {type: String, required: true, maxlength: 50, unique: true},
     password: {type: String, required: true, maxlength: 50,  minlength: 8},

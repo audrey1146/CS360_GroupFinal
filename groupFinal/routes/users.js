@@ -5,8 +5,8 @@
  * Purpose :      All of the user routes for the Slice of Pacific website
  ****************************************************************************/
 
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 const {body,validationResult} = require("express-validator");
 

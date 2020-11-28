@@ -5,11 +5,11 @@
  * Purpose :      Define the schema for the DailyChoice table
  ****************************************************************************/
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var DailyChoiceSchema = new Schema(
+let DailyChoiceSchema = new Schema(
   {
     user_id: { type: Schema.ObjectId, ref: 'User', required: true },
     topping_id: { type: Schema.ObjectId, ref: 'Topping', required: true },

@@ -5,8 +5,8 @@
  * Purpose :      Callback functions for the topping schema
  ****************************************************************************/
 
-var Topping = require('../models/topping');
-var async = require('async');
+let Topping = require('../models/topping');
+let async = require('async');
 
 /****************************************************************************
 Function:      topping_list

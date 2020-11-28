@@ -5,11 +5,11 @@
  * Purpose :      Define the schema for the Topping table
  ****************************************************************************/
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var ToppingSchema = new Schema(
+let ToppingSchema = new Schema(
   {
     name: {type: String, required: true, maxlength: 50, unique: true},
     image_path: {type: String, required: true, maxlength: 50}
