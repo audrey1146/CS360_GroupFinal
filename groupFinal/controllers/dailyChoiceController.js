@@ -16,7 +16,7 @@ exports.topping_list = function (req, res, next)
     if (err) { return next(err); }
     // Successful, so render.
     console.log(list_toppings);
-    res.render('index', { title: 'Topping List', toppings: list_toppings });
+    res.render('dailyChoice', { title: 'Topping List', toppings: list_toppings });
   })
 };
 
