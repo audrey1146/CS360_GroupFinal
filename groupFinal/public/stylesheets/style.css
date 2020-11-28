@@ -1,3 +1,9 @@
+/****************************************************************************
+ * File Name:     style.css
+ * Date:          11/16/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      Styling options for the website
+****************************************************************************/
 
 
 html{
@@ -49,26 +55,34 @@ form {
 
 
 /* CSS Used on the Landing and Login */
-.orange {
-  background-color: rgba(255, 156, 77, 68);
-}
-
-.scalingButtons {
-  font-size: 2vw;
-}
-
 .scalingHeader {
-  font-size: 4vw;
+  font-size: 2em;
 }
 
 .scalingErrors {
-  font-size: 1vw;
+  font-size: 1em;
+  line-height: 1.375em;
   font-family: 'Roboto Slab', serif;
 }
 
-.scalingText {
-  font-size: 2vw;
+.scalingText, .scalingButtons {
+  font-size: 2em;
+  line-height: 1.375em;
   font-family: 'Roboto Slab', serif;
+}
+
+@media screen and (max-width: 700px) {
+  .scalingButtons, .scalingText {
+    font-size: 16px;
+  }
+  
+  .scalingHeader {
+    font-size: 8vw;
+  }
+
+  .scalingErrors {
+    font-size: 13px;
+  }
 }
 
 .scalingImage {
@@ -76,61 +90,6 @@ form {
   width: 100%;
   height: auto;
 }
-
-/* 1024 and smaller
-@media screen and (max-width: 1024px) {
-  .scalingButtons {
-    font-size: 4vw;
-  }
-  
-  .scalingHeader {
-    font-size: 7vw;
-  }
-
-  .scalingErrors {
-    font-size: 3vw;
-  }
-
-  .scalingText {
-    font-size: 3vw;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .scalingButtons {
-    font-size: 5vw;
-  }
-  
-  .scalingHeader {
-    font-size: 7vw;
-  }
-
-  .scalingErrors {
-    font-size: 3vw;
-  }
-
-  .scalingText {
-    font-size: 4.5vw;
-  }
-}*/
-
-@media screen and (max-width: 600px) {
-  .scalingButtons {
-    font-size: 18px;
-  }
-  
-  .scalingHeader {
-    font-size: 7vw;
-  }
-
-  .scalingErrors {
-    font-size: 13px;
-  }
-
-  .scalingText {
-    font-size: 16px;
-  }
-} 
 
 .screenHeight {
   height: 70%!important;
