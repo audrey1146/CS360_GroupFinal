@@ -1,26 +1,35 @@
-extends layout
+// File Name:     landing.pug
+// Date:          11/27/2020
+// Assignment:    Final Group Assignment
+// Purpose:       View for the landing page
 
-block content
-  block content
-  h1= title
-  
-  p (#{topping_list.name})   (#{topping_list.image_path})
-  img(src='/public/images/pizza.svg', alt="No Image")
+doctype html
+html(class='h-100')
+  head
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title Slice of Pacific
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
+    link(rel='preconnect' href='https://fonts.gstatic.com')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap')
+    link(rel='stylesheet' type='text/css' href='../public/stylesheets/style.css')
 
+  body(class='green_background h-100')
+    h1
+      div(class='row row-no-padding')
+        div(id='header')
+          div(class='center')
+            h1(class='scalingHeader') Slice of Pacific
 
-<!--
-  exports.index = function(req, res) 
-{   
-  Topping.findOne().sort([['name', 'ascending']]).exec(function (err, list_toppings) 
-  {
-    if (err) { return next(err); }
-    // Successful, so render.
-    res.render('landing', { title: 'Topping Home', topping_list: list_toppings });
-  })  
-};
+    div(class='container h-100')
+      div(class='row h-100 justify-content-center align-items-center screenHeight')
+        div(class='col-xs-3 col-no-padding')
+          div(class='content_area text-center')
+            form
+              a(href='/login' class='scalingButtons green_background btn btn-success') Sign In!
+              div(class='row m-1')
+              img(src="/public/images/pizza.svg" class='scalingImage')
+              div(class='row m-1')
+              a(href='/register' class='scalingButtons green_background btn btn-success') Don't have an account?
 
-
-
-// GET catalog home page.
-router.get('/', topping_controller.index);
--->
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
