@@ -89,6 +89,7 @@ exports.user_add = async function(req, res) {
 
   if(bIsValid) {
     userCreate(req.body.user_name, req.body.password, req.body.first_name, req.body.last_name, req.body.email, req.body.security_answer, callback);
+    res.redirect('/login');
   }else {
     res.render('register', { title: "Slice of Pacific", alert: msg});
   }
