@@ -20,7 +20,83 @@ var callback = function(err, results) {
   }
 }
 
+exports.profile_edit = exports.user_add = async function(req, res) {
+  let bIsValid = true;
+  let msg ='Profile Update Unsuccessful';
+  // Finds the validation errors in this request and wraps them in an object with handy functions
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    bIsValid = false;
 
+    // Add each validation error to the message that will be displayed
+    errors.array().forEach(function (item, index) {
+      msg += item.msg;
+    })
+  }
+
+
+ // Validate all input
+
+
+  // Validate that the username is unique
+  let promiseUsername = new Promise(function (resolve, reject) {
+    User.find({ user_name: req.body.user_name}, function (err, user) { 
+      if (err){ 
+          console.log(err); 
+      } 
+      else{ 
+        if (user.length!=0) {
+          msg += ' | Username already taken';
+          bIsValid = false;
+          resolve('valid');
+        }
+        else {
+            resolve('invalid');
+        }
+      } 
+    });
+
+  });
+ 
+  // Validate that the email is unique
+  let promiseEmail = new Promise(function (resolve, reject) {
+    User.find({ email: req.body.email}, function (err, user) { 
+      if (err){ 
+          console.log(err); 
+      } 
+      else{ 
+        if (user.length!=0) {
+          msg += ' | Email already taken';
+          bIsValid = false;    
+          resolve('valid');               
+        }
+          else {
+            resolve('invalid');
+          }
+        } 
+      });
+  });
+  
+  await Promise.all([promiseUsername, promiseEmail]);
+
+  userdetail = { 
+    user_name: req.body.user_name,
+    password: req.body.password,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    security_answer: req.body.security_answer
+  }
+
+  if(bIsValid) {
+    userCreate(req.body.user_name, req.body.password, req.body.first_name, req.body.last_name, req.body.email, req.body.security_answer, callback);
+    res.redirect('/login');
+  }else {
+    res.render('register', {alert: msg, info: userdetail});
+  }
+  
+
+};
 
 exports.user_add = async function(req, res) {
   let bIsValid = true;
@@ -81,17 +157,22 @@ exports.user_add = async function(req, res) {
       });
   });
   
-
-
   await Promise.all([promiseUsername, promiseEmail]);
 
-
+  userdetail = { 
+    user_name: req.body.user_name,
+    password: req.body.password,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    security_answer: req.body.security_answer
+  }
 
   if(bIsValid) {
     userCreate(req.body.user_name, req.body.password, req.body.first_name, req.body.last_name, req.body.email, req.body.security_answer, callback);
     res.redirect('/login');
   }else {
-    res.render('register', { title: "Slice of Pacific", alert: msg});
+    res.render('register', {alert: msg, info: userdetail});
   }
   
 
