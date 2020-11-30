@@ -5,4 +5,4 @@
  * Purpose :      Callback functions for the dailyChoice schema
  ****************************************************************************/
 
-var DailyChoice = require('../models/dailyChoice');
+let DailyChoice = require('../models/dailyChoice');

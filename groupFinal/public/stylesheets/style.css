@@ -1,3 +1,9 @@
+/****************************************************************************
+ * File Name:     style.css
+ * Date:          11/16/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      Styling options for the website
+****************************************************************************/
 
 
 html{
@@ -45,4 +51,46 @@ form {
 }
 #nav {
   position: absolute;
+}
+
+
+/* CSS Used on the Landing and Login */
+.scalingHeader {
+  font-size: 2em;
+}
+
+.scalingErrors {
+  font-size: 1em;
+  line-height: 1.375em;
+  font-family: 'Roboto Slab', serif;
+}
+
+.scalingText, .scalingButtons {
+  font-size: 2em;
+  line-height: 1.375em;
+  font-family: 'Roboto Slab', serif;
+}
+
+@media screen and (max-width: 700px) {
+  .scalingButtons, .scalingText {
+    font-size: 16px;
+  }
+  
+  .scalingHeader {
+    font-size: 8vw;
+  }
+
+  .scalingErrors {
+    font-size: 13px;
+  }
+}
+
+.scalingImage {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+}
+
+.screenHeight {
+  height: 70%!important;
 }

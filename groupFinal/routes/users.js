@@ -1,5 +1,14 @@
-var express = require('express');
-var router = express.Router();
+/*****************************************************************************
+ * File Name:     users.js
+ * Date:          11/27/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      All of the user routes for the Slice of Pacific website
+ ****************************************************************************/
+
+let express = require('express');
+let router = express.Router();
+
+const {body,validationResult} = require("express-validator");
 
 var user_controller = require('../controllers/userController');
 
