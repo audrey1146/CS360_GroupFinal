@@ -7,13 +7,7 @@
 
 let mongoose = require('mongoose');
 
-<<<<<<< HEAD
-const { body, validationResult } = require('express-validator');
-
-var Schema = mongoose.Schema;
-=======
 let Schema = mongoose.Schema;
->>>>>>> 89fc5f7aa0969e83c559967c1c064d7574de6511
 
 let UserSchema = new Schema(
   {

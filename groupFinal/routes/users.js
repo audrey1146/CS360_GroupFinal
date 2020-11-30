@@ -13,25 +13,16 @@ const {body,validationResult} = require("express-validator");
 var user_controller = require('../controllers/userController');
 
 /* GET register page. */
-router.get('/new', function(req, res, next) {
-  res.render('register', { alert: '', info: {
-    user_name: '',
-    first_name: '',
-    last_name: '',
-    email: ''
-  } });
-});
+router.get('/new', user_controller.user_new);
 
-/* GET register page. */
-router.get('/profile', function(req, res, next) {
-  res.render('edit', { alert: '', info: {
-    user_name: '',
-    first_name: '',
-    last_name: '',
-    email: ''
-  } });
-});
+/* POST register new user. */
+router.post('/new/add', user_controller.user_new_validation, user_controller.user_new_add);
 
-router.post('/new/add', user_controller.validation, user_controller.user_add);
+/* GET profile page. */
+router.get('/profile/:id', user_controller.user_profile);
+
+/* POST edit profile information. */
+router.post('/profile/:id', user_controller.user_edit_validation, user_controller.user_profile_edit);
+
 
 module.exports = router;

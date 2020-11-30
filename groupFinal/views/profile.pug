@@ -1,7 +1,7 @@
-// File Name:     register.pug
-// Date:          11/27/2020
+// File Name:     profile.pug
+// Date:          11/30/2020
 // Assignment:    Final Group Assignment
-// Purpose:       View for registration page
+// Purpose:       View for the edit profile page
 
 doctype html
 html(class='h-100')
@@ -14,11 +14,20 @@ html(class='h-100')
     link(rel='stylesheet' type='text/css' href='/../public/stylesheets/style.css')
 
   body(class='green_background h-100')
-    h1
-      div(class='row row-no-padding')
-        div(id='header')
-          div(class='center')
-            h1(class='scalingHeader') Slice of Pacific
+    div(class='row row-no-padding')
+      div(id='header')
+        div(class='nav')
+          nav(class='navbar navbar-dark' id='nav')
+            button(class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation')
+              span(class='navbar-toggler-icon')
+        div(class='center')
+          h1 Slice of Pacific
+      div(class='pos-f-t')
+        div(class='collapse' id='navbarToggleExternalContent')
+          div(class=' p-4')
+            button(class='btn btn-secondary') Home
+            button(class='btn btn-secondary' method='GET' action='/users/profile/' + id) Edit Profile
+            button(class='btn btn-secondary') Logout 
 
     div(class='container h-100')
       div(class='row h-100 justify-content-center align-items-center screenHeight')
@@ -30,8 +39,7 @@ html(class='h-100')
                 for error in errors
                   li!=error.msg
 
-            form(method='POST' action='/users/new/add')
-    
+            form(method='POST' action='/users/profile/' + id)
               input(class='scalingText' type='text', placeholder='Username' name='user_name' value=userDetail.user_name required)
               div(class='row m-1')
               input(class='scalingText' type='text', placeholder='First Name' name='first_name' value=userDetail.first_name required)
@@ -40,15 +48,17 @@ html(class='h-100')
               div(class='row m-1')
               input(class='scalingText' type='email', placeholder='Email' name='email' value=userDetail.email required)
               div(class='row m-1')
-              input(class='scalingText' type='password' placeholder='Password' name='password' required)
+              input(class='scalingText' type='password' placeholder='New Password' name='password')
               div(class='row m-1')
-              input(class='scalingText' type='password' placeholder='Confirm Password' name='confirm_password' required)
+              input(class='scalingText' type='password' placeholder='Confirm New Password' name='confirm_password')
               p  Password must contain at least 8 characters and 1 number
               div(class='row m-1')
               p In which city did you first try pizza?
-              input(class='scalingText' type='text', placeholder='Security Answer' name='security_answer' required)
+              input(class='scalingText' type='text', placeholder='Security Answer' name='security_answer' value=userDetail.security_answer required)
+              div(class='row m-1')
+              input(class='scalingText' type='password', placeholder='Current Password' name='current_password' required)
               div(class='row m-3')
-              button(class='btn btn-success' type='submit') Sign up
+              button(class='btn btn-success' type='submit') Save
 
     script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
     script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
