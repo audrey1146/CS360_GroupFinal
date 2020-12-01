@@ -148,7 +148,7 @@ Description:   Create a new user in the database
 ****************************************************************************/
 function userCreate(userDetail, cb) 
 {
-  let newUser = new User(userdetail);
+  let newUser = new User(userDetail);
        
   newUser.save(function (err) 
   {
@@ -250,20 +250,8 @@ exports.user_edit_validation = checkSchema({
     in: ['body'],
     custom: {
       options: async (value, { req }) => {
-        let bCorrect = false;
-        await User.findOne( { _id: req.params.id }, function (err, result) 
-        {
-          if (err) throw err;
-          if (result.password === req.body.current_password) // Correct password
-          {
-            bCorrect = true;
-            return Promise.resolve('Correct password');
-          }else {
-            bCorrect = false;
-            return Promise.resolve('Incorrect password');
-          }
-        });
-        if(bCorrect) {
+        let user = await User.findOne( { _id: req.params.id }).exec();
+        if(user.password === req.body.current_password) {
           return Promise.resolve();
         }else {
           return Promise.reject();
@@ -273,8 +261,6 @@ exports.user_edit_validation = checkSchema({
     }
   }
 });
-
-
 
 
 /****************************************************************************
