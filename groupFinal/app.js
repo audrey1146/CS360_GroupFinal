@@ -17,7 +17,7 @@ let usersRouter = require('./routes/users');
 
 // Set up mongoose connection
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://dbUser:dbPassword@groupcluster.vh2v7.mongodb.net/local_final_db?retryWrites=true&w=majority';
+let mongoDB = 'mongodb+srv://zane:zane@cluster0.144ts.mongodb.net/local_final_db?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -28,8 +28,15 @@ let app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+
+
+
+// Express Validator Middleware
+
 app.use(express.json());
+
+
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, 'public')));
