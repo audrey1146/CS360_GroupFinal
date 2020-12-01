@@ -10,6 +10,7 @@ let DailyChoice = require('../models/dailychoice');
 let async = require('async')
 
 const {body,validationResult} = require("express-validator");
+const { count } = require('../models/user');
 
 /****************************************************************************
 Function:      user_landing
@@ -89,8 +90,44 @@ Description:   Render the stats page
 ****************************************************************************/
 exports.user_stats = function(req, res, next) 
 {
-  res.render('index', { title: 'Stats'});
+  let today = new Date ();
+  today.setDate(today.getDate()-20);
+  //console.log(today.toISOString());
+  DailyChoice.aggregate([
+    {"$match":
+      {
+       time_stamp: {$gte : new Date(today.toISOString())} 
+      } 
+    },
+    {"$group" : {_id: "$topping_id", count:{$sum:1}}},
+    {"$lookup": {
+      "localField": "_id",
+      "from": "toppings",
+      "foreignField": "_id",
+      "as": "toppinginfo"
+    }},
+    { "$unwind": "$toppinginfo" }
+    
+  ]).exec(function (err, result)
+  {
+    //console.log(result);
+    console.log("first item");
+    console.log(result)
+    if (err) throw err;
+    // Successful, so render.
+    res.render('stats', {toppings : result});
+  })
+  
 }
+/*
+{"$lookup": {
+      "localField": "topping_id",
+      "from": "toppings",
+      "foreignField": "_id",
+      "as": "toppinginfo"
+    }},
+    { "$unwind": "$toppinginfo" }
+*/
 
 /****************************************************************************
 Function:      user_login_post

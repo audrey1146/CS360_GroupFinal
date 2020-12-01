@@ -1,0 +1,74 @@
+// File Name:     stats.pug
+// Date:          11/27/2020
+// Assignment:    Final Group Assignment
+// Purpose:       View for the login page
+
+doctype html
+html(class='h-100')
+  head
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    title Slice of Pacific
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
+    link(rel='preconnect' href='https://fonts.gstatic.com')
+    link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap')
+    link(rel='stylesheet' type='text/css' href='../public/stylesheets/style.css')
+    script(type='text/javascript' src='https://www.gstatic.com/charts/loader.js')
+      
+  body(class='green_background h-100')
+    #header
+      .nav
+        nav#nav.navbar.navbar-dark
+          button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+      .center
+        h1 Slice of Pacific
+      .pos-f-t
+        #navbarToggleExternalContent.collapse
+          .p-4
+            button.btn.btn-secondary Home
+            button.btn.btn-secondary Edit Profile
+            button.btn.btn-secondary Logout
+    div(class='container h-100')
+      div(class='row m-3')
+      div(class='text-center' id='piechart')
+            
+            if missing 
+              p(class='scalingErrors')=missing
+
+            if errors
+              ul(class='text-left scalingErrors')
+                for error in errors
+                  li!=error.msg
+
+            script.
+              let arrData = ['#{toppings.map(element=>element.count).join("','")}'];
+              let arrNames = ['#{toppings.map(element=>element.toppinginfo.name).join("','")}'];
+              let finalData = [];
+              for (let i = 0; i< arrData.length; ++i){
+                finalData[i]=[arrNames[i], parseInt(arrData[i])];
+              }
+              console.log(finalData);
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Count');
+                data.addRows(finalData);
+
+                let options = {
+                  title: 'Today\'s Results'
+                };
+
+                let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                chart.draw(data, options);
+              }
+              
+             
+
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
+    
+    
