@@ -452,8 +452,7 @@ exports.user_login_post =
         if (err) throw err;
         if (result != null) // User exists
         {
-          res.redirect('/users/profile/' + result.ID)
-          //res.redirect('/home/' + result.ID)
+          res.redirect('/home/' + result.ID)
         }
         else // User does not exist - reload login page
         {
