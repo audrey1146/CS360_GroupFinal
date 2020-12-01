@@ -91,8 +91,7 @@ Description:   Render the stats page
 exports.user_stats = function(req, res, next) 
 {
   let today = new Date ();
-  today.setDate(today.getDate()-20);
-  //console.log(today.toISOString());
+  today.setDate(today.getDate()-1);
   DailyChoice.aggregate([
     {"$match":
       {
@@ -110,24 +109,12 @@ exports.user_stats = function(req, res, next)
     
   ]).exec(function (err, result)
   {
-    //console.log(result);
-    console.log("first item");
-    console.log(result)
     if (err) throw err;
     // Successful, so render.
     res.render('stats', {toppings : result});
   })
   
 }
-/*
-{"$lookup": {
-      "localField": "topping_id",
-      "from": "toppings",
-      "foreignField": "_id",
-      "as": "toppinginfo"
-    }},
-    { "$unwind": "$toppinginfo" }
-*/
 
 /****************************************************************************
 Function:      user_login_post

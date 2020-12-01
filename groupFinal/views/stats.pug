@@ -47,7 +47,6 @@ html(class='h-100')
               for (let i = 0; i< arrData.length; ++i){
                 finalData[i]=[arrNames[i], parseInt(arrData[i])];
               }
-              console.log(finalData);
               google.charts.load('current', {'packages':['corechart']});
               google.charts.setOnLoadCallback(drawChart);
 
