@@ -10,10 +10,19 @@ let router = express.Router();
 
 const {body,validationResult} = require("express-validator");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+var user_controller = require('../controllers/userController');
+
+/* GET register page. */
+router.get('/new', user_controller.user_new);
+
+/* POST register new user. */
+router.post('/new/add', user_controller.user_new_validation, user_controller.user_new_add);
+
+/* GET profile page. */
+router.get('/profile/:id', user_controller.user_profile);
+
+/* POST edit profile information. */
+router.post('/profile/:id', user_controller.user_edit_validation, user_controller.user_profile_edit);
 
 
 module.exports = router;
