@@ -1,15 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+/*****************************************************************************
+ * File Name:     app.js
+ * Date:          11/12/2020
+ * Assignment:    Final Group Assignment
+ * Purpose :      Application entry point that sets up and returns the
+ *                express() application object
+ ****************************************************************************/
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 
-//Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://DuaneStokes:MalheurFire2020@cluster0.gzcaf.mongodb.net/WebTechGroupFinalTest?authSource=admin&replicaSet=atlas-75di3v-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+
+// Set up mongoose connection
+let mongoose = require('mongoose');
+let mongoDB = 'mongodb+srv://DuaneStokes:MalheurFire2020@cluster0.gzcaf.mongodb.net/WebTechGroupFinalTest?authSource=admin&replicaSet=atlas-75di3v-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

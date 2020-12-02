@@ -5,9 +5,12 @@
  * Purpose :      All of the routes for the Slice of Pacific website
  ****************************************************************************/
 
+let express = require('express');
+let router = express.Router();
+
 // Require our controllers.
-var topping_controller = require('../controllers/toppingController');
-var dailyChoice_controller = require('../controllers/dailyChoiceController');
+let topping_controller = require('../controllers/toppingController');
+let dailyChoice_controller = require('../controllers/dailyChoiceController');
 let user_controller = require('../controllers/userController');
 
 
