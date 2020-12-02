@@ -9,7 +9,7 @@ var usersRouter = require('./routes/users');
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb+srv://dbUser:dbPassword@groupcluster.vh2v7.mongodb.net/local_final_db?retryWrites=true&w=majority';
+var mongoDB = 'mongodb+srv://DuaneStokes:MalheurFire2020@cluster0.gzcaf.mongodb.net/WebTechGroupFinalTest?authSource=admin&replicaSet=atlas-75di3v-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

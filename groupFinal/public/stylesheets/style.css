@@ -17,6 +17,8 @@ body{
 }
 
 .content_area {
+  height: 10px;
+  width: 10px;
   background-color: rgba(193, 39, 45, 68);
   border: 10px solid rgba(255, 156, 77, 68);
   box-shadow: 4px 3px 8px 1px #000000;
@@ -51,13 +53,15 @@ form {
 }
 
 .table_button {
-  background-color: rgba(193, 39, 45, 68);
+  background-color: rgba(112, 130, 56, 68);
   border: none;
+  width: 60px;
+  height: 10px;
 }
 
 .table_button:focus {
   outline: none;
-  background-color: rgba(112, 130, 56, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .go_button {

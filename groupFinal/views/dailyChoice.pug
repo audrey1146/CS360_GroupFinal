@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+  script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
   body(class='green_background')
     div(class='row row-no-padding')
       div(id='header')
@@ -19,11 +21,75 @@ block content
             button(class='btn btn-secondary') Logout
     br
     br
-    if toppings
-      ul
-        for tops in toppings
-          li!=tops
+    table(id='pizzaTable' class='center')
+      script.
+        let length = #{toppings.length};
+        let rowLength = #{toppings.length} / 4;
+        //body reference
+        let body = document.querySelector('body');
+        //create table elements
+        let tbl = document.querySelector('table');
+        let tr = undefined;
+        let td = undefined;
+        let img = undefined;
+        let br = document.createElement('br');
+        let btn = undefined;
+        let text = undefined;
+        let count = 0;
+        let arrNames = Array(#{toppings.length});
+        let arrPaths = Array(#{toppings.length});
+        let arrIDs = Array(#{toppings.length});
+        arrNames = ['#{toppings.map(element => element.name).join("','")}'];
+        arrPaths = ['#{toppings.map(element => element.image_path).join("','")}'];
+        arrIDs = ['#{toppings.map(element => element._id).join("','")}'];
+        //cells creation
+        for(let i = 0; i < rowLength; i++) {
+          tr = document.createElement('tr');
+          for (let j = 0; j < 4; j++) {
+            if (arrNames[count] != undefined) {
+              td = document.createElement('td');
+              td.className = 'content_area';
+              text = document.createTextNode(arrNames[count]);
+              img = document.createElement('img');
+              img.src = arrPaths[count];
+              img.className = 'cell';
+              img.style = 'width:80px';
+              btn = document.createElement('button');
+              btn.className = 'table_button';
+              td.appendChild(img);
+              td.appendChild(br);
+              td.appendChild(text);
+              td.appendChild(br);
+              td.appendChild(btn);
+              tr.appendChild(td);
+              count += 1;
+            }
+          }
+          tbl.appendChild(tr);
+        }
+        body.appendChild(tbl);
+
+
     br
-    a(href='/')
+    form(method='POST' action='/dailyChoice/new/add' + id)
       button(class='go_button') Go
-    br 
+        script.
+          let image_path = undefined;
+          let name = undefined;
+          let toppingID = undefined;
+          $(document).ready(function() {
+            $('#pizzaTable').on('click', '.table_button', function() {
+              let cell = $(this).closest('td');
+              let name = cell.text();
+              for (let k = 0; k < length; k++) {
+                if (name == arrNames[k]) {
+                  image_path = arrPaths[k];
+                  toppingID = arrIDs[k];
+                  break;
+                }
+              }
+              console.log(name + '\n' + image_path + '\n' + toppingID + '\n' + 'User ID: ' + '#{id}');
+            });
+          });
+          
+    br  

@@ -5,9 +5,24 @@
  * Purpose :      Callback functions for the dailyChoice schema
  ****************************************************************************/
 
-let Topping = require('../models/topping')
+let Topping = require('../models/topping');
 let DailyChoice = require('../models/dailyChoice');
+let User = require('../models/user');
 let async = require('async');
+
+const { checkSchema } = require('express-validator');
+const { body, validationResult } = require('express-validator');
+const dailyChoice = require('../models/dailyChoice');
+
+/****************************************************************************
+Function:      callback
+Description:   Callback function for userCreate function
+****************************************************************************/
+let callback = function(err, results) {
+  if (err) {
+      console.log('FINAL ERR: '+err);
+  }
+}
 
 exports.topping_list = function (req, res, next) 
 {
@@ -15,33 +30,49 @@ exports.topping_list = function (req, res, next)
   {
     if (err) { return next(err); }
     // Successful, so render.
-    console.log(list_toppings);
-    res.render('index', { title: 'Topping List', toppings: list_toppings });
+    //console.log(list_toppings[0]);
+    res.render('dailyChoice', { title: 'Daily Choice', toppings: list_toppings, id: req.params.id });
   })
 };
 
-/*Topping.find().sort([['name', 'ascending']]).exec(function (err, list_toppings) 
-{
-  if (err) { return next(err); }
-  // Successful, so render.
-  console.log(list_toppings);
-  //res.render('dailyChoice', { title: 'Daily Choice', toppings: list_toppings });
-});*/
+exports.dailyChoice_new_add = function (req, res) {
+  const errors = validationResult(req);
+  let today = new Date();
+  today.setDate(today.getDate());
+  let timeNow = new Date(today.toISOString());
 
-/*exports.dailyChoice = function (req, res, next) {
+  console.log(req.params.id + '\n' + req.body.topping_id + '\n' + timeNow);
 
-  Topping.find().populate('list_toppings').exec(function (err, list_toppings) 
+  let dailyChoiceDetail = {
+    user_id: req.params.id,
+    topping_id: req.body.topping_id,
+    time_stamp: timeNow
+  }
+  
+
+  if (!errors.isEmpty())
   {
-    if (err) { return next(err); }
-    //console.log(topping[0]);
-    res.render('dailyChoice', { title: 'Daily Choice', topping_list: list_toppings });
-  })
+    res.render('/dailyChoice/:id', {errors: errors.array(), dailyChoiceDetail});
+  }
+  else
+  {
+    dailyChoiceCreate(dailyChoiceDetail, callback);
+    res.redirect('/');
+  }
+}
 
-};*/
-
-/*Topping.find().populate('toppings').exec(function (err, toppings) 
+function dailyChoiceCreate(dailyChoiceDetail, cb)
 {
-  if (err) { return next(err); }
-  console.log(toppings[10].name, toppings[10].image_path);
-  //res.render('dailyChoice', { title: 'Daily Choice', topping: topping });
-});*/
+  let newDailyChoice  = new DailyChoice(dailyChoiceDetail);
+
+  newDailyChoice.save(function (err)
+  {
+    if (err)
+    {
+      cb (err, null);
+      return;
+    }
+    console.log('New DailyChoice: ' + newDailyChoice);
+    cb(null, newDailyChoice);
+  });
+}
