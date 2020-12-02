@@ -94,3 +94,11 @@ form {
 .screenHeight {
   height: 70%!important;
 }
+#piechart{
+  margin: 0;
+  padding: 0;
+  min-width: fit-content;
+  min-height: fit-content;
+  max-width: 90vw;
+  margin: auto;
+}

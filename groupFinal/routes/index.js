@@ -35,6 +35,7 @@ router.get('/home/:id', user_controller.user_home);
 /* GET home stats page. */
 router.get('/stats/:id', user_controller.user_stats);
 
-
+/* GET edit user page. */
+router.get('/edit/:id', user_controller.user_profile);
 
 module.exports = router;

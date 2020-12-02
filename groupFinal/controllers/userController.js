@@ -9,8 +9,9 @@ let User = require('../models/user');
 let DailyChoice = require('../models/dailychoice');
 let async = require('async')
 
+const {body,validationResult} = require("express-validator");
+const { count } = require('../models/user');
 const { checkSchema } = require('express-validator');
-const { body, validationResult } = require('express-validator');
 
 /****************************************************************************
 Function:      callback
@@ -348,7 +349,6 @@ exports.user_new_validation = checkSchema({
 
 });
 
-
 /****************************************************************************
 Function:      user_landing
 Description:   Render the landing page
@@ -375,7 +375,6 @@ exports.user_register = function(req, res, next)
 {
   res.render('index', { title: 'Register'});
 }
-
 /****************************************************************************
 Function:     user_home
 Description:  Will check if the user has filled out the form yet. 
@@ -393,12 +392,11 @@ exports.user_home = function(req, res, next)
     {
       let isChoice = false;
       let today = new Date ();
+      today.setDate(today.getDate()-1);
 
       for (let choice of choices)
       {
-        if (today.getDate () == choice.TimeStamp.getDate ()
-          && today.getMonth () == choice.TimeStamp.getMonth ()
-          && today.getFullYear () == choice.TimeStamp.getFullYear ())
+        if (choice.TimeStamp >= new Date(today.toISOString()))
         {
           isChoice = true;
         }
@@ -427,7 +425,31 @@ Description:   Render the stats page
 ****************************************************************************/
 exports.user_stats = function(req, res, next) 
 {
-  res.render('index', { title: 'Stats'});
+  let today = new Date ();
+  today.setDate(today.getDate()-1);
+  DailyChoice.aggregate([
+    {"$match":
+      {
+       time_stamp: {$gte : new Date(today.toISOString())} 
+      } 
+    },
+    {"$group" : {_id: "$topping_id", count:{$sum:1}}},
+    {"$lookup": {
+      "localField": "_id",
+      "from": "toppings",
+      "foreignField": "_id",
+      "as": "toppinginfo"
+    }},
+    { "$unwind": "$toppinginfo" }
+    
+  ]).exec(function (err, result)
+  {
+    if (err) throw err;
+    // Successful, so render.
+    console.log(result);
+    res.render('stats', {toppings : result, id: req.params.id});
+  })
+  
 }
 
 /****************************************************************************
