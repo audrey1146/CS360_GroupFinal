@@ -11,22 +11,27 @@ var usersRouter = require('./routes/users');
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb+srv://DuaneStokes:MalheurFire2020@cluster0.gzcaf.mongodb.net/WebTechGroupFinalTest?authSource=admin&replicaSet=atlas-75di3v-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
-var db = mongoose.connection;
+let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+
+
+
+// Express Validator Middleware
+
 app.use(express.json());
+
+
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-//app.use(express.static(path.join(__dirname, 'public')));
 app.use("/public", express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

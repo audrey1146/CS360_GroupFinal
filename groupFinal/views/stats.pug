@@ -1,0 +1,65 @@
+// File Name:     stats.pug
+// Date:          11/27/2020
+// Assignment:    Final Group Assignment
+// Purpose:       View for the login page
+
+doctype html
+html(class='h-100')
+  head
+    include head.pug
+  body(class='green_background h-100')
+    div(class='row row-no-padding')
+      div(id='header')
+        div(class='nav')
+          nav(class='navbar navbar-dark' id='nav')
+            button(class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation')
+              span(class='navbar-toggler-icon')
+        div(class='center')
+          h1 Slice of Pacific
+      div(class='pos-f-t')
+        div(class='collapse' id='navbarToggleExternalContent')
+          div(class=' p-4')
+            a(href='/home/' + id class='btn btn-danger') Home
+            a(href='/edit/' + id class='btn btn-secondary') Edit Profile
+            a(href='/login' class='btn btn-secondary') Logout
+    div(class='container h-100')
+      div(class='row m-3')
+      div(class='text-center' id='piechart')
+            
+            if missing 
+              p(class='scalingErrors')=missing
+
+            if errors
+              ul(class='text-left scalingErrors')
+                for error in errors
+                  li!=error.msg
+
+            script.
+              let arrData = ['#{toppings.map(element=>element.count).join("','")}'];
+              let arrNames = ['#{toppings.map(element=>element.toppinginfo.name).join("','")}'];
+              let finalData = [];
+              for (let i = 0; i< arrData.length; ++i){
+                finalData[i]=[arrNames[i], parseInt(arrData[i])];
+              }
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);
+
+              function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Topping');
+                data.addColumn('number', 'Count');
+                data.addRows(finalData);
+
+                let options = {
+                  title: 'Today\'s Results'
+                };
+
+                let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                chart.draw(data, options);
+              }
+             
+
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js' integrity='sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx' crossorigin='anonymous')
+    

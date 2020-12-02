@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  if errors
+    ul(class='text-left scalingErrors')
+      for error in errors
+        li!=error.msg
+
+  form(method='POST' action='/users/profile/' + id)
+    input(class='scalingText' type='text', placeholder='Username' name='user_name' value=userDetail.user_name required)
+    div(class='row m-1')
+    input(class='scalingText' type='text', placeholder='First Name' name='first_name' value=userDetail.first_name required)
+    div(class='row m-1')
+    input(class='scalingText' type='text' placeholder='Last Name' name='last_name' value=userDetail.last_name required)
+    div(class='row m-1')
+    input(class='scalingText' type='email', placeholder='Email' name='email' value=userDetail.email required)
+    div(class='row m-1')
+    input(class='scalingText' type='password' placeholder='New Password' name='password')
+    div(class='row m-1')
+    input(class='scalingText' type='password' placeholder='Confirm New Password' name='confirm_password')
+    p  Password must contain at least 8 characters and 1 number
+    div(class='row m-1')
+    p In which city did you first try pizza?
+    input(class='scalingText' type='text', placeholder='Security Answer' name='security_answer' value=userDetail.security_answer required)
+    div(class='row m-1')
+    input(class='scalingText' type='password', placeholder='Current Password' name='current_password' required)
+    div(class='row m-3')
+    button(class='btn btn-success' type='submit') Save

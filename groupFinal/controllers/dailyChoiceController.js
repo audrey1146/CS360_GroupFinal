@@ -12,7 +12,6 @@ let async = require('async');
 
 const { checkSchema } = require('express-validator');
 const { body, validationResult } = require('express-validator');
-const dailyChoice = require('../models/dailyChoice');
 
 /****************************************************************************
 Function:      callback

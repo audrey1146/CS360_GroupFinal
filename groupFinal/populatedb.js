@@ -3,23 +3,23 @@
 console.log('This script populates some users, toppings, and dailyChoices to your database.');
 
 // Get arguments passed on command line
-var userArgs = process.argv.slice(2);
+let userArgs = process.argv.slice(2);
 
-var async = require('async')
-var User = require('./models/user')
-var Topping = require('./models/topping')
-var DailyChoice = require('./models/dailyChoice')
+let async = require('async')
+let User = require('./models/user')
+let Topping = require('./models/topping')
+let DailyChoice = require('./models/dailyChoice')
 
-var mongoose = require('mongoose');
-var mongoDB = userArgs[0];
+let mongoose = require('mongoose');
+let mongoDB = userArgs[0];
 mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-var users = []
-var toppings = []
-var dailychoice = []
+let users = []
+let toppings = []
+let dailychoice = []
 
 // Function to create a user entry
 function userCreate(user_name, password, first_name, last_name, email, security_answer, cb) 
@@ -30,10 +30,10 @@ function userCreate(user_name, password, first_name, last_name, email, security_
     first_name: first_name,
     last_name: last_name,
     email: email,
-    security_answer, security_answer
+    security_answer: security_answer
   }
 
-  var newUser = new User(userdetail);
+  let newUser = new User(userdetail);
        
   newUser.save(function (err) 
   {
@@ -51,7 +51,7 @@ function userCreate(user_name, password, first_name, last_name, email, security_
 // Function to create a topping entry
 function toppingCreate(name, image_path, cb) 
 {
-  var newTopping = new Topping( { name: name, image_path: image_path });
+  let newTopping = new Topping( { name: name, image_path: image_path });
        
   newTopping.save(function (err) 
   {
@@ -69,7 +69,7 @@ function toppingCreate(name, image_path, cb)
 // Function to create a daily choice entry
 function dailyChoiceCreate(user_id, topping_id, time_stamp, cb) 
 {
-  var newChoice = new DailyChoice( { user_id: user_id, topping_id: topping_id, time_stamp: time_stamp });
+  let newChoice = new DailyChoice( { user_id: user_id, topping_id: topping_id, time_stamp: time_stamp });
        
   newChoice.save(function (err) 
   {

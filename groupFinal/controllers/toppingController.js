@@ -5,10 +5,13 @@
  * Purpose :      Callback functions for the topping schema
  ****************************************************************************/
 
-var Topping = require('../models/topping');
-var async = require('async');
+let Topping = require('../models/topping');
+let async = require('async');
 
-// Display list of all Toppings.
+/****************************************************************************
+Function:      topping_list
+Description:   Gets a list of all of the toppings
+****************************************************************************/
 exports.topping_list = function (req, res, next) 
 {
   Topping.find().sort([['name', 'ascending']]).exec(function (err, list_toppings) 
