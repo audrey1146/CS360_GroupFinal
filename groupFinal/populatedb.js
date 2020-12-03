@@ -106,7 +106,7 @@ function createUsers(cb) {
 
 // Creation of test data - toppings
 function createToppings(cb) {
-  async.parallel(
+  async.series(
     [
       function(callback) {
         toppingCreate('None', '/public/images/none.svg', callback);
@@ -293,7 +293,7 @@ function createToppings(cb) {
 
 // Creation of test data - daily choices
 function createDailyToppings(cb) {
-  async.parallel(
+  async.series(
     [
       function(callback) {
         dailyChoiceCreate(users[0], toppings[4], '2020-11-13', callback);

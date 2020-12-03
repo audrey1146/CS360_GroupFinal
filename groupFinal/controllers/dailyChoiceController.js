@@ -14,58 +14,98 @@ let mongoose = require('mongoose');
 
 const { checkSchema } = require('express-validator');
 const { body, validationResult } = require('express-validator');
+const { ObjectID } = require('mongodb');
 
 /****************************************************************************
 Function:      callback
 Description:   Callback function for userCreate function
 ****************************************************************************/
-let callback = function(err, results) {
+let callback = function(err, results) 
+{
   if (err) {
       console.log('FINAL ERR: '+err);
   }
 }
 
+/****************************************************************************
+Function:      topping_list
+Description:   
+****************************************************************************/
 exports.topping_list = function (req, res, next) 
 {
   Topping.find().sort([['name', 'ascending']]).exec(function (err, list_toppings) 
   {
     if (err) { return next(err); }
     // Successful, so render.
-    //console.log(list_toppings[0]);
-    res.render('dailyChoice', { title: 'Daily Choice', toppings: list_toppings, id: req.params.id });
+
+    // dailyChoice
+    res.render('poll', { title: 'Daily Choice', 
+      toppings: list_toppings, id: req.params.id });
   })
 };
 
-exports.dailyChoice_new_add = function (req, res) {
+/****************************************************************************
+Function:     dailyChoice_new_add
+Description:  Query the database to get the topping and the user objects,
+              then insert those into the dailyChoice table
+****************************************************************************/
+exports.dailyChoice_new_add = function (req, res) 
+{
   const errors = validationResult(req);
   let today = new Date();
   today.setDate(today.getDate());
   let timeNow = new Date(today.toISOString());
-
-  console.log(req.query.id);
-  console.log(req.body.topppingID);
-
-  //console.log(req.params.id + '\n' + req.body.topping_id + '\n' + timeNow);
-
-  let dailyChoiceDetail = {
-    user_id: req.params.id,
-    topping_id: req.body.toppingID,
-    time_stamp: timeNow
-  }
+  let dailyChoiceDetail;
   
-
-  if (!errors.isEmpty())
+  if ('null' == req.body.toppingName)
   {
-    res.render('/dailyChoice/:id', {errors: errors.array(), dailyChoiceDetail});
+    res.redirect('/dailyChoice/' + req.body.id);
   }
   else
-  {
-    dailyChoiceCreateNew(dailyChoiceDetail, callback);
-    res.redirect('/profile');
+  {   
+    console.log(req.body.id);
+    console.log(req.body.toppingName);
+
+    // Get the User and Topping Objects
+    async.parallel
+    ([
+      function(callback) 
+      {
+        User.find( {_id: ObjectID(req.body.id) } ).exec(callback)
+      },
+      function(callback) 
+      {
+        Topping.find({name: req.body.toppingName}).exec(callback)
+      },
+    ], function (err, results)
+    {
+      if (err) throw err;
+
+      if (results == null)
+      {
+        res.redirect('/dailyChoice/' + req.body.id);
+      }
+      else
+      {
+        /*console.log(results[0]);
+        console.log(results[1]);
+        dailyChoiceDetail = new DailyChoice(
+        {
+          user_id: results[0],
+          topping_id: results[1],
+          time_stamp: timeNow
+        });
+        console.log(dailyChoiceDetail);*/
+      }
+    });
   }
 }
 
-function dailyChoiceCreateNew(dailyChoiceDetail, cb)
+/****************************************************************************
+Function:      dailyChoiceCreate
+Description:   
+****************************************************************************/
+function dailyChoiceCreate(dailyChoiceDetail, cb)
 {
   let newDailyChoice  = new DailyChoice(dailyChoiceDetail);
 
@@ -73,7 +113,7 @@ function dailyChoiceCreateNew(dailyChoiceDetail, cb)
   {
     if (err)
     {
-      cb (err, null);
+      cb(err, null);
       return;
     }
     console.log('New DailyChoice: ' + newDailyChoice);

@@ -17,7 +17,7 @@ let usersRouter = require('./routes/users');
 
 // Set up mongoose connection
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://DuaneStokes:MalheurFire2020@cluster0.gzcaf.mongodb.net/WebTechGroupFinalTest?authSource=admin&replicaSet=atlas-75di3v-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true';
+let mongoDB = 'mongodb+srv://360User:360Pass@cluster0.yhpoq.mongodb.net/360Test?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

@@ -1,0 +1,101 @@
+// File Name:     poll.pug
+// Date:          12/02/2020
+// Assignment:    Final Group Assignment
+// Purpose:       
+
+doctype html
+html
+  head
+    include head.pug
+    link(rel='stylesheet' href='//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')
+    //link(rel='stylesheet' href='/resources/demos/style.css')
+    style.
+      #feedback { font-size: 1.4em; }
+      #selectable .ui-selecting { background: #FECA40; }
+      #selectable .ui-selected { background: #F39814; color: white; }
+      #selectable { list-style-type: none; margin: 0; padding: 0;}
+      #selectable li { margin: 3px; padding: 15px; float: left; width: 150px; height: 150px; font-size: 1em; text-align: center; background-color: lightslategrey;}
+    script(src='https://code.jquery.com/jquery-1.12.4.js')
+    script(src='https://code.jquery.com/ui/1.12.1/jquery-ui.js')
+    script.
+      $(function() 
+      {
+        $("#selectable").selectable(
+          {
+            selected : function(event, ui) 
+            { 
+              $(ui.selected).addClass("ui-selected").siblings().removeClass("ui-selected"); 
+            }
+          }
+        );
+      });
+
+      $(function() 
+      {
+        $("#selectable").selectable(
+          {
+            stop : function() 
+            { 
+              var text = $(this).children(".ui-selected").map(function ()
+              {
+                return $(this).text();
+              }).get().join('; ');
+              $("#selectedItem").val(text).change();
+            }
+          }
+        );
+      });
+
+  body(class='green_background')
+    div(class='row row-no-padding')
+      div(id='header')
+        div(class='nav')
+          nav(class='navbar navbar-dark' id='nav')
+            button(class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarToggleExternalContent' aria-controls='navbarToggleExternalContent' aria-expanded='false' aria-label='Toggle navigation')
+              span(class='navbar-toggler-icon')
+        div(class='center')
+          h1 Slice of Pacific
+          h2= title
+      div(class='pos-f-t')
+        div(class='collapse' id='navbarToggleExternalContent')
+          div(class=' p-4')
+            a(href='/home/' + id class='btn btn-danger') Home
+            a(href='/edit/' + id class='btn btn-secondary') Edit Profile
+            a(href='/login/' class='btn btn-secondary') Logout
+    div(class='row m-3')
+    div(class='row m-3')
+
+    div(class='container')
+      div(class='row justify-content-center')
+        //div(class='col-xs-6 col-no-padding')
+        div(class='content_area text-center')
+          form(method='POST' action='/dailyChoice/new/add')
+            ol#selectable(name='name' class='text-center')
+              for top in toppings
+                li(value=top.name) #{top.name}
+                  div(class='row m-1')
+                  img(class='pollImages' src=top.image_path)
+            div(class='row m-3')
+            input(type='hidden' name='id' value=id)
+            input(type='hidden' name='list_toppings' value=toppings)
+            input(type='hidden' id='selectedText' name='toppingName')
+            input(type='hidden' id='selectedItem')
+            button(type='submit' class='btn btn-success scalingButtons' id='submitChoice') Submit
+    
+    script.
+      let choiceButton = document.getElementById ('submitChoice');
+      choiceButton.addEventListener ('click', getText);
+
+      /* Check whether the user has selected a topping. If not set the topping choice to null */
+      function getText ()
+      {
+        if ($('#selectedItem').val())
+        {
+          document.getElementById('selectedText').setAttribute('value', $('#selectedItem').val());
+          
+        }
+        else
+        {
+          document.getElementById('selectedText').setAttribute('value', null);
+        } 
+      }

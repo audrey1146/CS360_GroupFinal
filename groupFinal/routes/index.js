@@ -22,10 +22,6 @@ router.get('/', user_controller.user_landing);
 router.get('/login', user_controller.user_login);
 
 
-/* GET registration page. */
-router.get('/register', user_controller.user_register);
-
-
 /* POST request to login */
 router.post('/login', user_controller.user_login_post);
 
@@ -37,13 +33,16 @@ router.get('/home/:id', user_controller.user_home);
 /* GET home stats page. */
 router.get('/stats/:id', user_controller.user_stats);
 
+
 /* GET edit user page. */
 router.get('/edit/:id', user_controller.user_profile);
+
 
 // GET dailyChoice page.
 router.get('/dailyChoice/:id', dailyChoice_controller.topping_list);
 
+
 //POST new dailyChoice
-router.post('/dailyChoice/new/add', dailyChoice_controller.dailyChoice_new_add);
+router.post('/dailyChoice/new/add/', dailyChoice_controller.dailyChoice_new_add);
 
 module.exports = router;
