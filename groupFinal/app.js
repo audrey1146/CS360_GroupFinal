@@ -17,7 +17,7 @@ let usersRouter = require('./routes/users');
 
 // Set up mongoose connection
 let mongoose = require('mongoose');
-let mongoDB = 'mongodb+srv://admin:admin@cluster0.byd2m.mongodb.net/slice_of_pacific?retryWrites=true&w=majority';
+let mongoDB = 'mongodb+srv://360User:360Pass@cluster0.yhpoq.mongodb.net/360Test?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));

@@ -22,6 +22,5 @@ DailyChoiceSchema.virtual('TimeStamp').get(function () {
   return this.time_stamp;
 });
 
-
 //Export model
 module.exports = mongoose.model('DailyChoice', DailyChoiceSchema);
