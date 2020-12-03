@@ -78,7 +78,7 @@ exports.dailyChoice_new_add = function (req, res)
       {
         Topping.find({name: req.body.toppingName}).exec(callback);
       },
-    ], function (err, results)
+    ], async function (err, results)
     {
       if (err) throw err;
 
@@ -95,7 +95,7 @@ exports.dailyChoice_new_add = function (req, res)
           topping_id: topID,
           time_stamp: timeNow
         });
-        dailyChoiceCreate(dailyChoiceDetail, callback);
+        await dailyChoiceCreate(dailyChoiceDetail, callback);
         res.redirect('/stats/' + req.body.id)
       }
     });
@@ -106,7 +106,7 @@ exports.dailyChoice_new_add = function (req, res)
 Function:      dailyChoiceCreate
 Description:   
 ****************************************************************************/
-function dailyChoiceCreate(dailyChoiceDetail, cb)
+async function dailyChoiceCreate(dailyChoiceDetail, cb)
 {
   let newDailyChoice  = new DailyChoice(dailyChoiceDetail);
 
