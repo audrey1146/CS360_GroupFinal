@@ -42,14 +42,14 @@ exports.dailyChoice_new_add = function (req, res) {
   today.setDate(today.getDate());
   let timeNow = new Date(today.toISOString());
 
-  console.log(req.query.id);
-  console.log(req.body.topppingID);
+  console.log(mongoose.Types.ObjectId(req.params.id));
+  console.log(mongoose.Types.ObjectId(req.body.topppingID));
 
   //console.log(req.params.id + '\n' + req.body.topping_id + '\n' + timeNow);
 
   let dailyChoiceDetail = {
-    user_id: req.params.id,
-    topping_id: req.body.toppingID,
+    user_id: mongoose.Types.ObjectId('111111111111111111111111'),
+    topping_id: mongoose.Types.ObjectId('111111111111111111111112'),
     time_stamp: timeNow
   }
   
@@ -61,7 +61,7 @@ exports.dailyChoice_new_add = function (req, res) {
   else
   {
     dailyChoiceCreateNew(dailyChoiceDetail, callback);
-    res.redirect('/profile');
+    res.redirect('/stats/' + req.params.id);
   }
 }
 
