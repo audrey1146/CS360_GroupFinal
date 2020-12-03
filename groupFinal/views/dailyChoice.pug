@@ -1,5 +1,8 @@
-block content
-  body(class='green_background')
+doctype html
+html(class='h-100')
+  head
+    include head.pug
+  body(class='green_background h-100')
     div(class='row row-no-padding')
       div(id='header')
         div(class='nav')
@@ -11,10 +14,12 @@ block content
           h2= title
       div(class='pos-f-t')
         div(class='collapse' id='navbarToggleExternalContent')
-          div(class='p-4')
+          div(class=' p-4')
             button(class='btn btn-secondary') Home
             button(class='btn btn-secondary') Edit Profile
-            button(class='btn btn-secondary') Logout
+            button(class='btn btn-secondary') Logout 
+
+    block content
     br
     br
     table(id='pizzaTable' class='center')
@@ -67,7 +72,7 @@ block content
 
 
     br
-    form(method='POST' action='/dailyChoice/new/add' + id)
+    form(method='POST' action='/dailyChoice/new/add/')
       button(class='go_button') Go
         script.
           let image_path = undefined;
@@ -84,8 +89,7 @@ block content
                   break;
                 }
               }
-              console.log(name + '\n' + image_path + '\n' + toppingID + '\n' + 'User ID: ' + '#{id}');
+              console.log(name + '\n' + image_path + '\n' + 'Topping ID: ' + toppingID + '\n' + 'User ID: ' + '#{id}');
             });
           });
-          
     br  

@@ -10,6 +10,8 @@ let DailyChoice = require('../models/dailyChoice');
 let User = require('../models/user');
 let async = require('async');
 
+let mongoose = require('mongoose');
+
 const { checkSchema } = require('express-validator');
 const { body, validationResult } = require('express-validator');
 
@@ -40,11 +42,14 @@ exports.dailyChoice_new_add = function (req, res) {
   today.setDate(today.getDate());
   let timeNow = new Date(today.toISOString());
 
-  console.log(req.params.id + '\n' + req.body.topping_id + '\n' + timeNow);
+  console.log(req.query.id);
+  console.log(req.body.topppingID);
+
+  //console.log(req.params.id + '\n' + req.body.topping_id + '\n' + timeNow);
 
   let dailyChoiceDetail = {
     user_id: req.params.id,
-    topping_id: req.body.topping_id,
+    topping_id: req.body.toppingID,
     time_stamp: timeNow
   }
   
@@ -55,12 +60,12 @@ exports.dailyChoice_new_add = function (req, res) {
   }
   else
   {
-    dailyChoiceCreate(dailyChoiceDetail, callback);
-    res.redirect('/');
+    dailyChoiceCreateNew(dailyChoiceDetail, callback);
+    res.redirect('/profile');
   }
 }
 
-function dailyChoiceCreate(dailyChoiceDetail, cb)
+function dailyChoiceCreateNew(dailyChoiceDetail, cb)
 {
   let newDailyChoice  = new DailyChoice(dailyChoiceDetail);
 

@@ -6,7 +6,7 @@
  ****************************************************************************/
 
 let User = require('../models/user');
-let DailyChoice = require('../models/dailychoice');
+let DailyChoice = require('../models/dailyChoice');
 let async = require('async')
 
 const {body,validationResult} = require("express-validator");
