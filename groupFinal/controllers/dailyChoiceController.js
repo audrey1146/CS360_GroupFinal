@@ -55,11 +55,12 @@ exports.dailyChoice_new_add = function (req, res)
   let today = new Date();
   today.setDate(today.getDate());
   let timeNow = new Date(today.toISOString());
+  let topID;
   let dailyChoiceDetail;
   
   if ('null' == req.body.toppingName)
   {
-    res.redirect('/dailyChoice/' + req.body.id);
+    res.redirect('/poll/' + req.body.id);
   }
   else
   {   
@@ -71,11 +72,11 @@ exports.dailyChoice_new_add = function (req, res)
     ([
       function(callback) 
       {
-        User.find( {_id: ObjectID(req.body.id) } ).exec(callback)
+        User.find( {_id: ObjectID(req.body.id) } ).exec(callback);
       },
       function(callback) 
       {
-        Topping.find({name: req.body.toppingName}).exec(callback)
+        Topping.find({name: req.body.toppingName}).exec(callback);
       },
     ], function (err, results)
     {
@@ -83,19 +84,19 @@ exports.dailyChoice_new_add = function (req, res)
 
       if (results == null)
       {
-        res.redirect('/dailyChoice/' + req.body.id);
+        res.redirect('/poll/' + req.body.id);
       }
       else
       {
-        /*console.log(results[0]);
-        console.log(results[1]);
+        topID = results[1].map(element => element.id);
         dailyChoiceDetail = new DailyChoice(
         {
-          user_id: results[0],
-          topping_id: results[1],
+          user_id: mongoose.Types.ObjectId(req.body.id),
+          topping_id: topID,
           time_stamp: timeNow
         });
-        console.log(dailyChoiceDetail);*/
+        dailyChoiceCreate(dailyChoiceDetail, callback);
+        res.redirect('/stats/' + req.body.id)
       }
     });
   }

@@ -45,4 +45,13 @@ router.get('/dailyChoice/:id', dailyChoice_controller.topping_list);
 //POST new dailyChoice
 router.post('/dailyChoice/new/add/', dailyChoice_controller.dailyChoice_new_add);
 
+
+// GET poll page.
+router.get('/poll/:id', dailyChoice_controller.topping_list);
+
+
+//POST new poll
+router.post('/poll/new/add/', dailyChoice_controller.dailyChoice_new_add);
+
+
 module.exports = router;
