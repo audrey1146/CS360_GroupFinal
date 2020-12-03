@@ -436,7 +436,6 @@ exports.user_stats = function(req, res, next)
   {
     if (err) throw err;
     // Successful, so render.
-    //console.log(result);
     res.render('stats', {toppings : result, id: req.params.id});
   })
   
