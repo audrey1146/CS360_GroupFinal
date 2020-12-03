@@ -6,11 +6,9 @@
  ****************************************************************************/
 
 let User = require('../models/user');
-let DailyChoice = require('../models/dailychoice');
-let async = require('async')
+let DailyChoice = require('../models/dailyChoice');
 
 const {body,validationResult} = require("express-validator");
-const { count } = require('../models/user');
 const { checkSchema } = require('express-validator');
 
 /****************************************************************************
@@ -368,14 +366,6 @@ exports.user_login = function(req, res, next)
 }
 
 /****************************************************************************
-Function:      user_register
-Description:   Render the registration page
-****************************************************************************/
-exports.user_register = function(req, res, next) 
-{
-  res.render('index', { title: 'Register'});
-}
-/****************************************************************************
 Function:     user_home
 Description:  Will check if the user has filled out the form yet. 
               If yes then the home page is the poll page, otherwise
@@ -408,12 +398,12 @@ exports.user_home = function(req, res, next)
       }
       else // Has not made choice today
       {
-        res.render('index', { title: 'Poll'});
+        res.redirect('/dailyChoice/' + req.params.id);
       }
     }
     else // Has never made a choice
     {
-      res.render('index', { title: 'Poll'});
+      res.redirect('/dailyChoice/' + req.params.id);
     }
     
   })
@@ -446,7 +436,7 @@ exports.user_stats = function(req, res, next)
   {
     if (err) throw err;
     // Successful, so render.
-    console.log(result);
+    //console.log(result);
     res.render('stats', {toppings : result, id: req.params.id});
   })
   
