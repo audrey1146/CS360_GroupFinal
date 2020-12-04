@@ -29,7 +29,8 @@ let callback = function(err, results)
 
 /****************************************************************************
 Function:      topping_list
-Description:   
+Description:   Querys the topping schema for all of the toppings,
+               then renders the poll page
 ****************************************************************************/
 exports.topping_list = function (req, res, next) 
 {
@@ -64,9 +65,6 @@ exports.dailyChoice_new_add = function (req, res)
   }
   else
   {   
-    console.log(req.body.id);
-    console.log(req.body.toppingName);
-
     // Get the User and Topping Objects
     async.parallel
     ([
@@ -104,7 +102,7 @@ exports.dailyChoice_new_add = function (req, res)
 
 /****************************************************************************
 Function:      dailyChoiceCreate
-Description:   
+Description:   Inserts the daily choice into the database
 ****************************************************************************/
 async function dailyChoiceCreate(dailyChoiceDetail, cb)
 {
