@@ -1,4 +1,4 @@
-# CS360_Group6F ReadMe
+# CS360_Group6 ReadMe
 Final group project for CS 360. A full-stack web application to get the "Slice of Pacific"
 
 Tutorial on how to run the ‘Slice of Pacific’ website. For this same tutorial with step by step images go to this URL: https://docs.google.com/document/d/1H3bV7YUo50gxjUR5lKDV-P0QloMjgalTUN_kIuOmh5w/edit.
