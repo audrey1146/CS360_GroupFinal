@@ -172,24 +172,14 @@ exports.user_edit_validation = checkSchema({
   user_name: {
     in: ['body'],
     custom: {
-      options: async (value, { req }) => {
-        let bUnique = true;
-        await User.findOne( { user_name: req.body.user_name }, function (err, result) 
+      options: async (value, {req}) => {
+        let user = await User.findOne({user_name: req.body.user_name}).exec();
+        // Reject if the username is taken by another user
+        if (user != null && user._id != req.params.id)
         {
-          if (err) throw err;
-          if (result != null && result._id != req.params.id) // Username is taken
-          {
-            bUnique = false;
-            return Promise.resolve('Username already in use');
-          }else {
-            bUnique = true;
-            return Promise.resolve('Username is unique');
-          }
-        });
-        if(bUnique) {
-          return Promise.resolve();
-        }else {
           return Promise.reject();
+        }else {
+          return Promise.resolve();
         }
       },
       errorMessage: 'Username already in use'
@@ -199,24 +189,14 @@ exports.user_edit_validation = checkSchema({
   email: {
     in: ['body'],
     custom: {
-      options: async (value, { req }) => {
-        let bUnique = true;
-        await User.findOne( { email: req.body.email }, function (err, result) 
+      options: async (value, {req}) => {
+        let user = await User.findOne({email: req.body.email}).exec();
+        // Reject if the email is taken by another user
+        if (user != null && user._id != req.params.id) // Email is taken
         {
-          if (err) throw err;
-          if (result != null && result._id != req.params.id) // Email is taken
-          {
-            bUnique = false;
-            return Promise.resolve('Email already in use');
-          }else {
-            bUnique = true;
-            return Promise.resolve('Email is unique');
-          }
-        });
-        if(bUnique) {
-          return Promise.resolve();
-        }else {
           return Promise.reject();
+        }else {
+          return Promise.resolve();
         }
       },
       errorMessage: 'Email already in use'
@@ -229,7 +209,7 @@ exports.user_edit_validation = checkSchema({
       options: {checkFalsy: true}
     },
     isLength: {
-      errorMessage: 'Password must at least 8 chars long',
+      errorMessage: 'Password must be at least 8 chars long',
       // Multiple options would be expressed as an array
       options: { min: 8 }
     },
@@ -238,7 +218,7 @@ exports.user_edit_validation = checkSchema({
       errorMessage: 'Password must contain at least 1 number'
     },
     custom: {
-      options: (value, { req }) => {
+      options: (value, {req}) => {
         return value === req.body.confirm_password;
       },
       errorMessage: 'Passwords must match'
@@ -248,8 +228,9 @@ exports.user_edit_validation = checkSchema({
   current_password: {
     in: ['body'],
     custom: {
-      options: async (value, { req }) => {
+      options: async (value, {req}) => {
         let user = await User.findOne( { _id: req.params.id }).exec();
+        // Resolve if entered password is matches the stored password
         if(user.password === req.body.current_password) {
           return Promise.resolve();
         }else {
@@ -271,24 +252,14 @@ exports.user_new_validation = checkSchema({
   user_name: {
     in: ['body'],
     custom: {
-      options: async (value, { req }) => {
-        let bUnique = true;
-        await User.findOne( { user_name: req.body.user_name }, function (err, result) 
+      options: async (value, {req}) => {
+        let user = await User.findOne({user_name: req.body.user_name}).exec();
+        // Reject if username is taken
+        if (user != null) // Username is taken
         {
-          if (err) throw err;
-          if (result != null) // Username is taken
-          {
-            bUnique = false;
-            return Promise.resolve('Username already in use');
-          }else {
-            bUnique = true;
-            return Promise.resolve('Username is unique');
-          }
-        });
-        if(bUnique) {
-          return Promise.resolve();
-        }else {
           return Promise.reject();
+        }else {
+          return Promise.resolve();
         }
       },
       errorMessage: 'Username already in use'
@@ -298,24 +269,15 @@ exports.user_new_validation = checkSchema({
   email: {
     in: ['body'],
     custom: {
-      options: async (value, { req }) => {
-        let bUnique = true;
-        await User.findOne( { email: req.body.email }, function (err, result) 
+      options: async (value, {req}) => {
+        // Reject if email is taken
+        let user = await User.findOne({email: req.body.email}).exec();
+        // Reject if email is taken
+        if (user != null)
         {
-          if (err) throw err;
-          if (result != null) // Email is taken
-          {
-            bUnique = false;
-            return Promise.resolve('Email already in use');
-          }else {
-            bUnique = true;
-            return Promise.resolve('Email is unique');
-          }
-        });
-        if(bUnique) {
-          return Promise.resolve();
-        }else {
           return Promise.reject();
+        }else {
+          return Promise.resolve();
         }
       },
       errorMessage: 'Email already in use'
@@ -338,7 +300,7 @@ exports.user_new_validation = checkSchema({
       errorMessage: 'Password must contain at least 1 number'
     },
     custom: {
-      options: (value, { req }) => {
+      options: (value, {req}) => {
         return value === req.body.confirm_password;
       },
       errorMessage: 'Passwords must match'
