@@ -9,7 +9,6 @@ let express = require('express');
 let router = express.Router();
 
 // Require our controllers.
-let topping_controller = require('../controllers/toppingController');
 let dailyChoice_controller = require('../controllers/dailyChoiceController');
 let user_controller = require('../controllers/userController');
 
