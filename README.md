@@ -43,3 +43,6 @@ Follow the Express Tutorial if the MongoDB cluster and project sections do not m
     1.  Run “npm update”
     2.  Run “npm run devstart”
     3.  Follow the link to the landing page:  http://localhost:3000/ 
+
+PC 'mongodb+srv://360User:360Pass@cluster0.yhpoq.mongodb.net/360Test?retryWrites=true&w=majority';
+LAPTOP 'mongodb+srv://dbUser:dbPassword@groupcluster.vh2v7.mongodb.net/local_final_db?retryWrites=true&w=majority'
